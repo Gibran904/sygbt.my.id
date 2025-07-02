@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Random Meme Generator</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      padding: 2rem;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      font-size: 18px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 90%;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #aaa;
+    }
+
+    h2 {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Meme Harian Gibran 🎉</h1>
+  <button onclick="getMeme()">Generate Meme</button>
+  <div id="meme-container">
+    <h2 id="meme-title"></h2>
+    <img id="meme-img" src="" alt="" />
+  </div>
+
+  <script>
+    async function getMeme() {
+      const btn = document.querySelector("button");
+      btn.disabled = true;
+      btn.innerText = "Loading...";
+
+      const res = await fetch("https://meme-api.com/gimme");
+      const data = await res.json();
+      
+      document.getElementById("meme-img").src = data.url;
+      document.getElementById("meme-title").innerText = data.title;
+
+      btn.innerText = "Generate Meme";
+      btn.disabled = false;
+    }
+  </script>
+</body>
+</html>
